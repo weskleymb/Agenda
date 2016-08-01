@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -115,19 +117,15 @@ public class FormContatoUI extends JFrame {
                 try {
                     String fone = FoneHelper.clear(ftFone.getText());
                     if (FoneHelper.clear(ftFone.getText()).substring(2, 3).equals("9")) {
-                        try {
-                            mask = new MaskFormatter("(##) #####-####");
-                        } catch (ParseException error) {}
+                        mask = new MaskFormatter("(##) #####-####");
                         ftFone.setFormatterFactory(new DefaultFormatterFactory(mask));
                         ftFone.setText(fone);
                     } else {
-                        try {
-                            mask = new MaskFormatter("(##) ####-####");
-                        } catch (ParseException error) {}
+                        mask = new MaskFormatter("(##) ####-####");
                         ftFone.setFormatterFactory(new DefaultFormatterFactory(mask));
                         ftFone.setText(fone);
                     }
-                } catch (StringIndexOutOfBoundsException error) {}
+                } catch (StringIndexOutOfBoundsException | ParseException error) {}
             }
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -151,5 +149,5 @@ public class FormContatoUI extends JFrame {
         frame.setLocation(x, y);
         frame.setVisible(true);
     }
-    
+
 }
