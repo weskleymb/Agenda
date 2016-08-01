@@ -107,9 +107,7 @@ public class FormContatoUI extends JFrame {
                         }
                     }
                 }
-            }
-
-            
+            }  
         });
         ftFone.addKeyListener(new KeyListener() {
             @Override
