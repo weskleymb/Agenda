@@ -63,22 +63,25 @@ public class ContatoUI extends JFrame {
         btDelete.setBorder(null);
         add(btDelete);
         
-        model = new DefaultTableModel(new Object[] {"ID", "NOME", "TELEFONE"}, 0);
+        model = new DefaultTableModel(new Object[] {"ID", "NOME", "TELEFONE"}, 0) {public boolean isCellEditable(int row, int col) {return false;}};
         loadTable();
         tbContatos = new JTable(model);
         tbContatos.setRowHeight(30);
         
         DefaultTableCellRenderer alinharDireita = new DefaultTableCellRenderer();
         alinharDireita.setHorizontalAlignment(SwingConstants.RIGHT);
+        DefaultTableCellRenderer alinharCentro = new DefaultTableCellRenderer();
+        alinharCentro.setHorizontalAlignment(SwingConstants.CENTER);
         
         tbContatos.getColumnModel().getColumn(0).setPreferredWidth(5);
-        tbContatos.getColumnModel().getColumn(1).setPreferredWidth(50);
-        tbContatos.getColumnModel().getColumn(2).setPreferredWidth(50);
+        tbContatos.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tbContatos.getColumnModel().getColumn(2).setPreferredWidth(150);
         
         tbContatos.getColumnModel().getColumn(0).setResizable(false);
         tbContatos.getColumnModel().getColumn(1).setResizable(false);
         tbContatos.getColumnModel().getColumn(2).setResizable(false);
         
+        tbContatos.getColumnModel().getColumn(0).setCellRenderer(alinharCentro);
         tbContatos.getColumnModel().getColumn(2).setCellRenderer(alinharDireita);
         
         tbContatos.getTableHeader().setReorderingAllowed(false);
