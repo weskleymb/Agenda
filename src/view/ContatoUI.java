@@ -144,17 +144,17 @@ public class ContatoUI extends JFrame {
             @Override
             public void keyTyped(KeyEvent e) {}
             @Override
-            public void keyPressed(KeyEvent e) {
+            public void keyPressed(KeyEvent e) {}
+            @Override
+            public void keyReleased(KeyEvent e) {
                 loadTable();
             }
-            @Override
-            public void keyReleased(KeyEvent e) {}
         });
     }
     
     private void loadTable() {
         model.setRowCount(0);
-        for (Contato contato : new ContatoCTRL().listar(null)) {
+        for (Contato contato : new ContatoCTRL().listar(tfPesquisar.getText().equals("") ? null : tfPesquisar.getText())) {
             model.addRow(new Object[] {contato.getId(), contato.getNome(), FoneHelper.format(contato.getFone())});
         }
     }
