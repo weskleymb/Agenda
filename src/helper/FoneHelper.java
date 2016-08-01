@@ -2,7 +2,7 @@ package helper;
 
 public class FoneHelper {
 
-    public static String formatar(String fone) {
+    public static String format(String fone) {
         int length = fone.length();
         if (length == 10) {
             fone = "(" + fone.substring(0, 2) + ") " + fone.substring(2,6) + "-" + fone.substring(6);

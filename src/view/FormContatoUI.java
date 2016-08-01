@@ -139,7 +139,7 @@ public class FormContatoUI extends JFrame {
     private void loadTable() {
         model.setRowCount(0);
         for (Contato contato : new ContatoCTRL().listar(null)) {
-            model.addRow(new Object[] {contato.getId(), contato.getNome(), FoneHelper.formatar(contato.getFone())});
+            model.addRow(new Object[] {contato.getId(), contato.getNome(), FoneHelper.format(contato.getFone())});
         }
     }
     
