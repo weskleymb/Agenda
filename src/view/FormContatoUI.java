@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.text.ParseException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import model.Contato;
 
@@ -54,7 +57,7 @@ public class FormContatoUI extends JFrame {
         add(lbFone);
         
         try {
-            mask = new MaskFormatter("(##) #####-####");
+            mask = new MaskFormatter("(##) ####-####");
         } catch (ParseException error) {
             System.out.println("ERRO: " + error.toString());
         }
@@ -107,6 +110,31 @@ public class FormContatoUI extends JFrame {
             }
 
             
+        });
+        ftFone.addKeyListener(new KeyListener() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                try {
+                    String fone = FoneHelper.clear(ftFone.getText());
+                    if (FoneHelper.clear(ftFone.getText()).substring(2, 3).equals("9")) {
+                        try {
+                            mask = new MaskFormatter("(##) #####-####");
+                        } catch (ParseException error) {}
+                        ftFone.setFormatterFactory(new DefaultFormatterFactory(mask));
+                        ftFone.setText(fone);
+                    } else {
+                        try {
+                            mask = new MaskFormatter("(##) ####-####");
+                        } catch (ParseException error) {}
+                        ftFone.setFormatterFactory(new DefaultFormatterFactory(mask));
+                        ftFone.setText(fone);
+                    }
+                } catch (StringIndexOutOfBoundsException error) {}
+            }
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {}
         });
     }
     
