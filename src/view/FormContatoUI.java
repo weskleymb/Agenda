@@ -10,8 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -59,14 +57,29 @@ public class FormContatoUI extends JFrame {
         add(lbFone);
         
         try {
-            mask = new MaskFormatter("(##) ####-####");
+            if (contato == null) {
+                setIconImage(new ImageIcon("images/icons/add.png").getImage());
+                setTitle("Novo Contato");
+                mask = new MaskFormatter("(##) ####-####");
+                ftFone = new JFormattedTextField(mask);
+            } else {
+                setIconImage(new ImageIcon("images/icons/edit.png").getImage());
+                setTitle("Editar Contato");
+                if (FoneHelper.clear(contato.getFone()).length() == 10) {
+                    mask = new MaskFormatter("(##) ####-####");
+                } else {
+                    mask = new MaskFormatter("(##) #####-####");
+                }
+                ftFone = new JFormattedTextField(mask);
+                tfNome.setText(contato.getNome());
+                ftFone.setText(contato.getFone());
+            }
         } catch (ParseException error) {
             System.out.println("ERRO: " + error.toString());
+        } finally {
+            ftFone.setBounds(170, 35, 130, 32);
+            add(ftFone);
         }
-        
-        ftFone = new JFormattedTextField(mask);
-        ftFone.setBounds(170, 35, 130, 32);
-        add(ftFone);
         
         btSalvar = new JButton(new ImageIcon("images/icons/save.png"));
         btSalvar.setBounds(320, 35, 32, 32);
@@ -74,15 +87,6 @@ public class FormContatoUI extends JFrame {
         btSalvar.setBorder(null);
         add(btSalvar);
         
-        if (contato == null) {
-            setIconImage(new ImageIcon("images/icons/add.png").getImage());
-            setTitle("Novo Contato");
-        } else {
-            setIconImage(new ImageIcon("images/icons/edit.png").getImage());
-            setTitle("Editar Contato");
-            tfNome.setText(contato.getNome());
-            ftFone.setText(contato.getFone());
-        }
     }
 
     private void setEvents() {
