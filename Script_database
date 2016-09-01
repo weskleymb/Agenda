@@ -1,0 +1,16 @@
+-- Table: franquias
+
+-- DROP TABLE franquias;
+
+CREATE TABLE franquias
+(
+  cod_franquia serial NOT NULL,
+  nome_franquia character varying(30) NOT NULL,
+  segmento_franquia character varying(30) NOT NULL,
+  CONSTRAINT franq_cod PRIMARY KEY (cod_franquia)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE franquias
+  OWNER TO postgres;
