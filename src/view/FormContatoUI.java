@@ -24,7 +24,9 @@ import model.Contato;
 
 public class FormContatoUI extends JFrame {
 
-    private JLabel lbNome, lbFone;
+	private static final long serialVersionUID = 1L;
+
+	private JLabel lbNome, lbFone;
     private JTextField tfNome;
     private JFormattedTextField ftFone;
     private MaskFormatter mask;

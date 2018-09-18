@@ -80,7 +80,7 @@ public class ContatoDAO {
     
     public List<Contato> selectAll() {
         if (db.open()) {
-            List<Contato> contatos = new ArrayList();
+            List<Contato> contatos = new ArrayList<Contato>();
             sql = "SELECT * FROM tb_contatos";
             try {
                 ps = db.connection.prepareStatement(sql);
@@ -106,7 +106,7 @@ public class ContatoDAO {
     
     public List<Contato> selectFilter(String filter) {
         if (db.open()) {
-            List<Contato> contatos = new ArrayList();
+            List<Contato> contatos = new ArrayList<Contato>();
             String filtro = "%" + filter + "%";
             sql = "SELECT * FROM tb_contatos WHERE con_nome LIKE ? OR con_fone LIKE ?";
             try {
