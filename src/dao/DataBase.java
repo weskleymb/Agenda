@@ -7,11 +7,17 @@ import java.sql.SQLException;
 public class DataBase {
 
     public Connection connection = null;
-    private final String DRIVER = "com.mysql.jdbc.Driver";
+    private final String DRIVER = "org.mariadb.jdbc.Driver";
     private final String DATABASE = "db_agenda";
-    private final String URL = "jdbc:mysql://localhost:3306/" + DATABASE;
+    private final String URL = "jdbc:mariadb://localhost:3306/" + DATABASE;
     private final String USER = "root";
-    private final String PASSWORD = "senac";
+    private final String PASSWORD = "";
+    
+    //org.mariadb.jdbc.Driver
+    //jdbc:mariadb://localhost:3306/
+    
+    //com.mysql.cj.jdbc.Driver
+    //jdbc:mysql://localhost:3306/
     
     public boolean open() {
         try {
